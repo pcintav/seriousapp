@@ -26,5 +26,19 @@
     allow="microphone; camera; autoplay; fullscreen"
     allowfullscreen
   ></iframe>
+
+  <!-- ✅ Add this script to notify React Native that the avatar is ready -->
+  <script>
+    const iframe = document.getElementById("heygen");
+
+    iframe.addEventListener("load", () => {
+      // Wait a moment to ensure the HeyGen avatar fully appears
+      setTimeout(() => {
+        if (window.ReactNativeWebView) {
+          window.ReactNativeWebView.postMessage("avatar_ready");
+        }
+      }, 2000); // Adjust delay (in ms) if overlay hides too early or too late
+    });
+  </script>
 </body>
 </html>
